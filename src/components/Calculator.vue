@@ -6,9 +6,9 @@
           <v-card-title>Profit First Calculator</v-card-title>
           <v-card-text>
             <v-form>
-              <!-- Total Income Input -->
-              <v-text-field label="Total Income" v-model.number="localTotalIncome" type="number"
-                required></v-text-field>
+              <!-- Total Income Input with Auto-formatting -->
+              <v-text-field label="Total Income" v-model="formattedIncome" type="number" required
+                @input="handleIncomeInput"></v-text-field>
 
               <!-- Slider for Profit Percentage -->
               <v-row class="mt-4">
@@ -92,6 +92,9 @@ export default {
     const localOwnerPayPercentage = ref(ownerPayPercentage.value);
     const localTaxPercentage = ref(taxPercentage.value);
 
+    // Create a formatted income string for display
+    const formattedIncome = ref('0.00');
+
     // Computed property to check if combined percentages exceed 100%
     const percentageError = computed(() => {
       const combinedPercentage = localProfitPercentage.value + localOwnerPayPercentage.value + localTaxPercentage.value;
@@ -130,6 +133,20 @@ export default {
       localStorage.setItem('taxPercentage', localTaxPercentage.value);
     };
 
+    // Function to handle income input and format it
+    const handleIncomeInput = (event) => {
+      const value = event.target.value;
+      const numericValue = parseInt(value.replace(/\D/g, ''));
+      if (!isNaN(numericValue)) {
+        const formattedValue = (numericValue / 100).toFixed(2);
+        localTotalIncome.value = numericValue / 100;
+        formattedIncome.value = formattedValue;
+      } else {
+        formattedIncome.value = '0.00';
+        localTotalIncome.value = 0;
+      }
+    };
+
     // Watch for changes in the input fields and handle both updating the store and persisting values
     watch([localTotalIncome, localProfitPercentage, localOwnerPayPercentage, localTaxPercentage], () => {
       if (!percentageError.value) {
@@ -139,12 +156,14 @@ export default {
     });
 
     return {
+      formattedIncome,
       localTotalIncome,
       localProfitPercentage,
       localOwnerPayPercentage,
       localTaxPercentage,
       allocations,
       percentageError,
+      handleIncomeInput,
     };
   },
 };
