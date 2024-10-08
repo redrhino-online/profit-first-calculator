@@ -1,5 +1,6 @@
 {
   "name": "profit-first-calculator",
+  "homepage": "https://profit-first-calculator.redrhino.online",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
