@@ -1,7 +1,3 @@
 <template>
-  <HelloWorld />
+  <Calculator />
 </template>
-
-<script setup>
-  //
-</script>
