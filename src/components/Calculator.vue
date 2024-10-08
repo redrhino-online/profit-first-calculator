@@ -52,7 +52,7 @@
 <script>
 import { useAppStore } from '@/stores/app';
 import { storeToRefs } from 'pinia';
-import { ref, watch, computed } from 'vue';
+import { ref, watch, computed, onMounted } from 'vue';
 
 export default {
   setup() {
@@ -72,12 +72,29 @@ export default {
       return combinedPercentage >= 100;
     });
 
+    onMounted(() => {
+      const storedProfit = localStorage.getItem('profitPercentage');
+      const storedOwnerPay = localStorage.getItem('ownerPayPercentage');
+      const storedTax = localStorage.getItem('taxPercentage');
+
+      if (storedProfit) localProfitPercentage.value = parseFloat(storedProfit);
+      if (storedOwnerPay) localOwnerPayPercentage.value = parseFloat(storedOwnerPay);
+      if (storedTax) localTaxPercentage.value = parseFloat(storedTax);
+    });
+
     watch([localTotalIncome, localProfitPercentage, localOwnerPayPercentage, localTaxPercentage], () => {
       if (!percentageError.value) {
         store.totalIncome = localTotalIncome.value;
+
         store.profitPercentage = localProfitPercentage.value;
+        localStorage.setItem('profitPercentage', localProfitPercentage.value);
+
         store.ownerPayPercentage = localOwnerPayPercentage.value;
+        localStorage.setItem('ownerPayPercentage', localOwnerPayPercentage.value);
+
         store.taxPercentage = localTaxPercentage.value;
+        localStorage.setItem('taxPercentage', localTaxPercentage.value);
+
         store.calculateAllocations();
       }
     });
