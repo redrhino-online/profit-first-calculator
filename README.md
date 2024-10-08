@@ -1,79 +1,108 @@
-# Vuetify (Default)
+# Profit First Allocations Calculator
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+## Overview
 
-## ❗️ Important Links
+The **Profit First Allocations Calculator** is a financial tool based on the "Profit First" methodology. It allows individuals and businesses to divide their income into distinct categories such as profit, owner’s pay, taxes, and operating expenses. This approach helps prioritize profit, ensuring that it's not an afterthought but rather the cornerstone of the financial strategy.
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+The calculator takes in:
+- Total Income
+- Percentage allocation for Profit, Owner's Pay, and Taxes
 
-## 💿 Install
+It then provides a breakdown of the dollar amounts allocated to each category. The remaining income is automatically allocated for operating expenses.
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+This tool is ideal for:
+- **Entrepreneurs**
+- **Small Business Owners**
+- **Freelancers**
+- **Individuals looking to manage personal finances more efficiently**
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+By visualizing how their revenue is distributed, users can ensure they are allocating the proper portions of their income to the right categories while adhering to the Profit First philosophy.
 
-After completing the installation, your environment is ready for Vuetify development.
+## Features
+- Input fields for total income and percentage allocation to Profit, Owner Pay, and Tax.
+- Automatically calculates and displays allocated amounts for each category.
+- Validates that the sum of Profit, Owner Pay, and Tax percentages does not exceed 100%.
+- Real-time updates to allocations as values are inputted.
+- Prevents calculations when combined percentages exceed 100%, displaying a helpful alert message.
 
-## ✨ Features
+## Technologies Used
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+### Core Technologies:
+- **[Vue 3](https://vuejs.org/)**: A progressive JavaScript framework for building user interfaces.
+- **[Vuetify](https://vuetifyjs.com/)**: A Vue UI Library with beautifully handcrafted Material components.
+- **[Pinia](https://pinia.vuejs.org/)**: A state management library for Vue 3, replacing Vuex with a more intuitive API.
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+### Additional Technologies:
+- **JavaScript (ES6+)**: For writing logic and interacting with the Vue components.
+- **HTML5 & CSS3**: Used for the layout and styling of the application.
+- **Vite**: A fast development build tool for Vue applications.
 
-## 💡 Usage
+## Installation and Setup
 
-This section covers how to start the development server and build your project for production.
+### Prerequisites:
+- **Node.js** (version 14.x or higher) and **npm** (version 6.x or higher) should be installed on your system.
 
-### Starting the Development Server
+### Steps to Install and Run the Application:
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/redrhino-online/profit-first-calculator.git
+   cd profit-first-calculator
+   ```
 
+2. **Install Dependencies:**
+   Install all required dependencies by running the following command:
+   ```bash
+   npm install
+   ```
+
+3. **Run the Application:**
+   Start the development server using:
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the Application:**
+   After running the server, you can access the application by navigating to `http://localhost:3000` in your web browser.
+
+### Build for Production:
+To build the application for production, run:
 ```bash
-yarn dev
+npm run build
 ```
+This will generate the production-ready static files in the `dist/` directory.
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## Usage Instructions
 
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
+1. Enter your **Total Income** in the first field.
+2. Specify the percentage you wish to allocate to **Profit**, **Owner Pay**, and **Tax**.
+3. Ensure that the combined total of these percentages is less than 100%. If not, an alert will notify you, and no calculation will be performed.
+4. The app will automatically calculate and display the dollar amounts allocated to each category (Profit, Owner Pay, Tax, and Operating Expenses).
+5. The breakdown will be visible in the **Allocation Breakdown** section in real-time.
 
-### Building for Production
+## Use Case
 
-To build your project for production, use:
+The Profit First Allocations Calculator is built to help users adhere to the **Profit First** financial management strategy developed by Mike Michalowicz. The concept of Profit First is to prioritize profit from the start instead of treating it as the leftover result after all expenses are covered. By making consistent allocations from revenue, businesses can improve profitability and maintain healthy cash flows.
 
-```bash
-yarn build
-```
+This calculator simplifies that process by providing a quick, real-time breakdown of how revenue should be split across Profit, Owner Pay, Taxes, and Operating Expenses. Entrepreneurs, small business owners, and individuals can use this tool to enforce better budgeting practices, making sure profit is a consistent focus in their financial planning.
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## Contributing
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/redrhino-online/profit-first-calculator/issues) if you want to contribute or report a bug.
 
-## 💪 Support Vuetify Development
+To contribute:
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix (`git checkout -b feature/my-new-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/my-new-feature`).
+5. Create a Pull Request.
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+## License
 
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
+## Contact
 
-Copyright (c) 2016-present Vuetify, LLC
+If you have any questions or feedback, feel free to contact us via:
+- Email: dave@redrhino.online
+- GitHub: [superdave2u](https://github.com/superdave2u)
