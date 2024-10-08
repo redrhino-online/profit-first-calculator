@@ -6,14 +6,39 @@
           <v-card-title>Profit First Calculator</v-card-title>
           <v-card-text>
             <v-form>
+              <!-- Total Income Input -->
               <v-text-field label="Total Income" v-model.number="localTotalIncome" type="number"
                 required></v-text-field>
-              <v-text-field label="Profit Percentage (%)" v-model.number="localProfitPercentage" type="number"
-                required></v-text-field>
-              <v-text-field label="Owner Pay Percentage (%)" v-model.number="localOwnerPayPercentage" type="number"
-                required></v-text-field>
-              <v-text-field label="Tax Percentage (%)" v-model.number="localTaxPercentage" type="number"
-                required></v-text-field>
+
+              <!-- Slider for Profit Percentage -->
+              <v-row class="mt-4">
+                <v-col cols="12" sm="6" md="4">
+                  <v-label>Profit Percentage: {{ localProfitPercentage }}%</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                  <v-slider v-model="localProfitPercentage" :max="100" :min="0" step="1"></v-slider>
+                </v-col>
+              </v-row>
+
+              <!-- Slider for Owner Pay Percentage -->
+              <v-row class="mt-4">
+                <v-col cols="12" sm="6" md="4">
+                  <v-label>Owner Pay Percentage: {{ localOwnerPayPercentage }}%</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                  <v-slider v-model="localOwnerPayPercentage" :max="100" :min="0" step="1"></v-slider>
+                </v-col>
+              </v-row>
+
+              <!-- Slider for Tax Percentage -->
+              <v-row class="mt-4">
+                <v-col cols="12" sm="6" md="4">
+                  <v-label>Tax Percentage: {{ localTaxPercentage }}%</v-label>
+                </v-col>
+                <v-col cols="12" sm="6" md="8">
+                  <v-slider v-model="localTaxPercentage" :max="100" :min="0" step="1"></v-slider>
+                </v-col>
+              </v-row>
 
               <!-- Display error message if percentages exceed 100% -->
               <v-alert v-if="percentageError" type="error" class="mt-3" dismissible>
@@ -67,6 +92,7 @@ export default {
     const localOwnerPayPercentage = ref(ownerPayPercentage.value);
     const localTaxPercentage = ref(taxPercentage.value);
 
+    // Computed property to check if combined percentages exceed 100%
     const percentageError = computed(() => {
       const combinedPercentage = localProfitPercentage.value + localOwnerPayPercentage.value + localTaxPercentage.value;
       return combinedPercentage >= 100;
@@ -107,8 +133,8 @@ export default {
     // Watch for changes in the input fields and handle both updating the store and persisting values
     watch([localTotalIncome, localProfitPercentage, localOwnerPayPercentage, localTaxPercentage], () => {
       if (!percentageError.value) {
-        updateStoreValues();   // Update Pinia store values
-        persistToLocalStorage();  // Persist the new values in localStorage
+        updateStoreValues(); // Update Pinia store values
+        persistToLocalStorage(); // Persist the new values in localStorage
       }
     });
 
