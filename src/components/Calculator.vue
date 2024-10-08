@@ -72,7 +72,13 @@ export default {
       return combinedPercentage >= 100;
     });
 
+    // Load persisted data from localStorage when the component is mounted
     onMounted(() => {
+      loadFromLocalStorage();
+    });
+
+    // Function to load values from localStorage
+    const loadFromLocalStorage = () => {
       const storedProfit = localStorage.getItem('profitPercentage');
       const storedOwnerPay = localStorage.getItem('ownerPayPercentage');
       const storedTax = localStorage.getItem('taxPercentage');
@@ -80,22 +86,29 @@ export default {
       if (storedProfit) localProfitPercentage.value = parseFloat(storedProfit);
       if (storedOwnerPay) localOwnerPayPercentage.value = parseFloat(storedOwnerPay);
       if (storedTax) localTaxPercentage.value = parseFloat(storedTax);
-    });
+    };
 
+    // Function to update store values
+    const updateStoreValues = () => {
+      store.totalIncome = localTotalIncome.value;
+      store.profitPercentage = localProfitPercentage.value;
+      store.ownerPayPercentage = localOwnerPayPercentage.value;
+      store.taxPercentage = localTaxPercentage.value;
+      store.calculateAllocations();
+    };
+
+    // Function to persist values to localStorage
+    const persistToLocalStorage = () => {
+      localStorage.setItem('profitPercentage', localProfitPercentage.value);
+      localStorage.setItem('ownerPayPercentage', localOwnerPayPercentage.value);
+      localStorage.setItem('taxPercentage', localTaxPercentage.value);
+    };
+
+    // Watch for changes in the input fields and handle both updating the store and persisting values
     watch([localTotalIncome, localProfitPercentage, localOwnerPayPercentage, localTaxPercentage], () => {
       if (!percentageError.value) {
-        store.totalIncome = localTotalIncome.value;
-
-        store.profitPercentage = localProfitPercentage.value;
-        localStorage.setItem('profitPercentage', localProfitPercentage.value);
-
-        store.ownerPayPercentage = localOwnerPayPercentage.value;
-        localStorage.setItem('ownerPayPercentage', localOwnerPayPercentage.value);
-
-        store.taxPercentage = localTaxPercentage.value;
-        localStorage.setItem('taxPercentage', localTaxPercentage.value);
-
-        store.calculateAllocations();
+        updateStoreValues();   // Update Pinia store values
+        persistToLocalStorage();  // Persist the new values in localStorage
       }
     });
 
